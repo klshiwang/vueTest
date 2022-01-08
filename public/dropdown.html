@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>物体自由落体</title>
+  <style>
+    #canvas{
+      box-shadow: 5px 5px 10px 0px #666;
+    }
+  </style>
+</head>
+<body>
+  
+  <canvas id="canvas" ></canvas>
+  <script src="./js/jquery-3.6.0.js"></script>
+  <script>
+    
+    const $cvs = $('#canvas')
+    $cvs.attr('width','500').attr('height','800')
+    const ctx = document.getElementById('canvas').getContext('2d')
+    // console.log(ctx);
+    // ctx.fillStyle = 'red'
+    // ctx.arc(100,100,50,0,2*Math.PI)
+    // ctx.fill()
+
+    //清除画布的函数
+    function clear(ctx){
+      ctx.fillStyle = '#ccc'
+      // console.log($cvs[0].width);
+      ctx.rect(0,0,$cvs[0].width,$cvs[0].height)
+      ctx.fill()
+      ctx.fillStyle = 'red'
+    }
+
+ 
+
+    //定时绘制
+    let startTime = Date.now()
+    let timer = setInterval(() => {
+      //清除画布
+      clear(ctx)
+      
+      // ctx.fillStyle = 'blue'
+      // ctx.rect(0,0,500,800)
+      
+      // ctx.fill()
+      //根据内容绘制
+      //自由落体距离-时间公式:y = t*t*g/2    g=9.8
+      let currentTime = (Date.now() - startTime )/1000
+      let y =   Math.round(currentTime*currentTime*1000/2)
+      
+      console.log(currentTime,y);
+      
+      ctx.fillStyle = 'red'
+      ctx.beginPath()
+      ctx.arc(100,y,50,0,2*Math.PI)
+      ctx.closePath()
+      ctx.fill()
+
+      if(y>800+50){
+        clearInterval(timer)
+      }
+
+    }, 10);
+
+    // window.requestAnimationFrame(function(){
+    //   console.log(Date.now());
+    //   console.log('123');
+    // })
+    
+    // setInterval(() => {
+    //   ctx.fill()
+    //   console.log(456);
+    // }, 1000);
+  </script>
+</body>
+</html>
