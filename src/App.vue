@@ -4,7 +4,11 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <transition name="fade" mode="out-in">
+      <router-view/>
+    </transition>
+    
+    
   </div>
 </template>
 
@@ -29,4 +33,20 @@
     }
   }
 }
+// transition动画
+.fade-enter-active,.fade-leave-active{
+    transition: all 0.2s;
+  }
+  .fade-enter,.fade-leave-to{
+    position:relative;
+    top: 100px;
+   opacity: 0;
+  }
+  .fade-enter-to,.fade-leave{
+    position:relative;
+    top: 0;
+   opacity: 1;
+  }
+ 
+ 
 </style>
